@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Library - Badges</title>
+
+  <!-- Tailwind CDN (for quick testing) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head> 
+<body>
+    <section id="badges">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Badge</h2>
+      <p class="text-xs text-gray-400 mb-4 font-mono">data-controller="badge"</p>
+      <div class="bg-white rounded-2xl border border-gray-200 divide-y divide-gray-100">
+        <div class="p-5">
+          <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">Variants</p>
+          <div class="flex flex-wrap gap-2">
+            <span data-controller="badge" data-badge-variant-value="default">Default</span>
+            <span data-controller="badge" data-badge-variant-value="success">Success</span>
+            <span data-controller="badge" data-badge-variant-value="warning">Warning</span>
+            <span data-controller="badge" data-badge-variant-value="danger">Danger</span>
+            <span data-controller="badge" data-badge-variant-value="info">Info</span>
+            <span data-controller="badge" data-badge-variant-value="outline">Outline</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">With dot</p>
+          <div class="flex flex-wrap gap-2">
+            <span data-controller="badge" data-badge-variant-value="success" data-badge-dot-value="true">Active</span>
+            <span data-controller="badge" data-badge-variant-value="warning" data-badge-dot-value="true">Pending</span>
+            <span data-controller="badge" data-badge-variant-value="danger"  data-badge-dot-value="true">Offline</span>
+            <span data-controller="badge" data-badge-variant-value="default" data-badge-dot-value="true">Archived</span>
+          </div>
+        </div>
+      </div>
+    </section>
+</body>
+</html>

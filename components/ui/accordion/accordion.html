@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Library - Accordion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section id="accordion">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Accordion</h2>
+      <p class="text-xs text-gray-400 mb-4 font-mono">data-controller="accordion"</p>
+      <div class="bg-white rounded-2xl border border-gray-200 divide-y divide-gray-100">
+        <div data-controller="accordion">
+          <button data-action="click->accordion#toggle" class="w-full flex items-center justify-between px-5 py-4 text-sm font-semibold text-gray-800 hover:bg-slate-50 transition-colors text-left">
+            <span>What is Stimulus.js?</span>
+            <svg data-accordion-target="icon" class="w-4 h-4 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div data-accordion-target="body" class="hidden px-5 pb-5 text-sm text-gray-500 leading-relaxed">Stimulus is a modest JavaScript framework that connects DOM elements to controllers via data attributes — giving you structure without a full SPA.</div>
+        </div>
+        <div data-controller="accordion">
+          <button data-action="click->accordion#toggle" class="w-full flex items-center justify-between px-5 py-4 text-sm font-semibold text-gray-800 hover:bg-slate-50 transition-colors text-left">
+            <span>How does it pair with Tailwind?</span>
+            <svg data-accordion-target="icon" class="w-4 h-4 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div data-accordion-target="body" class="hidden px-5 pb-5 text-sm text-gray-500 leading-relaxed">Tailwind handles all styling via utility classes. Stimulus handles behavior. Together they're a clean, pragmatic stack — no build step required for prototyping.</div>
+        </div>
+        <div data-controller="accordion">
+          <button data-action="click->accordion#toggle" class="w-full flex items-center justify-between px-5 py-4 text-sm font-semibold text-gray-800 hover:bg-slate-50 transition-colors text-left">
+            <span>Is it compatible with Hotwire / Turbo?</span>
+            <svg data-accordion-target="icon" class="w-4 h-4 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div data-accordion-target="body" class="hidden px-5 pb-5 text-sm text-gray-500 leading-relaxed">Yes — Stimulus is part of the Hotwire suite. It pairs perfectly with Turbo for server-rendered HTML apps that need light JavaScript interactivity.</div>
+        </div>
+      </div>
+    </section>
+</body>
+</html>
