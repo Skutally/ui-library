@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@hotwired/stimulus": "^3.2.2",
-    "tailwindcss": "^4.2.2"
-  }
-}
