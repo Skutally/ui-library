@@ -1,0 +1,14 @@
+<!-- Toast notifications -->
+<div data-controller="toast">
+  <div data-toast-target="container" class="fixed top-4 right-4 z-[60] flex flex-col gap-2 w-80" aria-live="polite"></div>
+  <div class="flex flex-wrap gap-2">
+    <button data-action="click->toast#show" data-toast-type-param="info" data-toast-msg-param="Here is some useful info."
+      data-controller="button" data-button-variant-value="outline">Info</button>
+    <button data-action="click->toast#show" data-toast-type-param="success" data-toast-msg-param="Changes saved successfully!"
+      data-controller="button" data-button-variant-value="outline">Success</button>
+    <button data-action="click->toast#show" data-toast-type-param="warning" data-toast-msg-param="You have unsaved changes."
+      data-controller="button" data-button-variant-value="outline">Warning</button>
+    <button data-action="click->toast#show" data-toast-type-param="danger" data-toast-msg-param="Something went wrong."
+      data-controller="button" data-button-variant-value="outline">Error</button>
+  </div>
+</div>

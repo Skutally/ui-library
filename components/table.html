@@ -1,0 +1,75 @@
+<!-- Table with sortable headers -->
+<div class="rounded-lg border border-border overflow-hidden" data-controller="table">
+  <table class="w-full caption-bottom text-sm">
+    <thead class="border-b border-border">
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <th data-col="0" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Invoice
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="1" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Status
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="2" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Method
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="3" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-right align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center justify-end gap-1">
+            Amount
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody data-table-target="body" class="[&_tr:last-child]:border-0">
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV001</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Credit Card</td>
+        <td class="p-4 align-middle text-right font-medium">$250.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV002</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="warning">Pending</span></td>
+        <td class="p-4 align-middle text-muted-foreground">PayPal</td>
+        <td class="p-4 align-middle text-right font-medium">$150.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV003</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="danger">Overdue</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Bank Transfer</td>
+        <td class="p-4 align-middle text-right font-medium">$350.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV004</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Credit Card</td>
+        <td class="p-4 align-middle text-right font-medium">$450.00</td>
+      </tr>
+      <tr class="transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV005</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">PayPal</td>
+        <td class="p-4 align-middle text-right font-medium">$550.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="border-t border-border bg-muted/50">
+      <tr>
+        <td colspan="3" class="p-4 align-middle font-medium">Total</td>
+        <td class="p-4 align-middle text-right font-bold">$1,750.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

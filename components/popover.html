@@ -1,0 +1,28 @@
+<!-- Popover -->
+<div class="flex flex-wrap gap-6">
+  <div class="relative inline-block" data-controller="popover">
+    <button data-action="click->popover#toggle" data-controller="button" data-button-variant-value="outline">Open Popover</button>
+    <div data-popover-target="content" class="hidden opacity-0 scale-95 absolute left-0 top-full mt-2 w-80 rounded-md border border-border bg-background shadow-md z-50 transition-all duration-100">
+      <div class="p-4 space-y-4">
+        <div class="space-y-2">
+          <h4 class="font-medium leading-none">Dimensions</h4>
+          <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+        </div>
+        <div class="grid gap-3">
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Width</label>
+            <input data-controller="input" type="text" value="100%" class="col-span-2"/>
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Height</label>
+            <input data-controller="input" type="text" value="25px" class="col-span-2"/>
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Max. width</label>
+            <input data-controller="input" type="text" value="300px" class="col-span-2"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

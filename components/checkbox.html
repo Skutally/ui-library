@@ -1,0 +1,32 @@
+<!-- Checkbox examples -->
+<div class="space-y-4">
+  <!-- Default unchecked -->
+  <div class="flex items-center gap-3" data-controller="checkbox">
+    <button role="checkbox" aria-checked="false" data-action="click->checkbox#toggle"
+      class="h-4 w-4 shrink-0 rounded-sm border border-border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="hidden h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Accept terms and conditions</label>
+  </div>
+
+  <!-- Pre-checked -->
+  <div class="flex items-center gap-3" data-controller="checkbox" data-checkbox-checked-value="true">
+    <button role="checkbox" aria-checked="true" data-action="click->checkbox#toggle"
+      class="h-4 w-4 shrink-0 rounded-sm border border-primary bg-primary text-primary-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Send me marketing emails</label>
+  </div>
+
+  <!-- With description -->
+  <div class="flex items-start gap-3" data-controller="checkbox">
+    <button role="checkbox" aria-checked="false" data-action="click->checkbox#toggle"
+      class="mt-0.5 h-4 w-4 shrink-0 rounded-sm border border-border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="hidden h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <div>
+      <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Use different settings for mobile</label>
+      <p class="text-sm text-muted-foreground mt-1">You can manage your mobile notifications in the settings page.</p>
+    </div>
+  </div>
+</div>

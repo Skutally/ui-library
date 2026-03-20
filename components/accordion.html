@@ -1,0 +1,30 @@
+<!-- Accordion — each item has data-accordion-item for scoping -->
+<div class="rounded-lg border border-border divide-y divide-border" data-controller="accordion">
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it accessible?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It adheres to the WAI-ARIA design pattern and supports keyboard navigation.
+    </div>
+  </div>
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it styled?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It comes with default styles that match the other components' aesthetic using Tailwind CSS utility classes.
+    </div>
+  </div>
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it animated?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It uses CSS transitions for smooth open/close animations with rotate transforms on the chevron icon.
+    </div>
+  </div>
+</div>

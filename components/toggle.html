@@ -1,0 +1,33 @@
+<!-- Switch / Toggle -->
+<div class="rounded-lg border border-border divide-y divide-border">
+  <div class="flex items-center justify-between p-4" data-controller="toggle">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Airplane Mode</label>
+      <p class="text-xs text-muted-foreground">Disable all wireless connections.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+    </button>
+  </div>
+  <div class="flex items-center justify-between p-4" data-controller="toggle" data-toggle-checked-value="true">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Notifications</label>
+      <p class="text-xs text-muted-foreground">Receive push notifications.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="true">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-primary transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50" style="transform:translateX(20px)"></div>
+    </button>
+  </div>
+  <div class="flex items-center justify-between p-4" data-controller="toggle">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Marketing emails</label>
+      <p class="text-xs text-muted-foreground">Receive emails about new products.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+    </button>
+  </div>
+</div>

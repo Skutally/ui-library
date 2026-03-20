@@ -1,0 +1,42 @@
+<!-- Default -->
+<div class="grid gap-4 max-w-sm">
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Email</label>
+    <input data-controller="input" type="email" placeholder="name@example.com"/>
+  </div>
+
+  <!-- With icon -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Search</label>
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input data-controller="input" data-input-icon-value="true" type="text" placeholder="Search..."/>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Email</label>
+    <input data-controller="input" data-input-variant-value="error" type="email" value="invalid-email"/>
+    <p class="text-sm text-red-500 mt-1.5">Please enter a valid email address.</p>
+  </div>
+
+  <!-- Success state -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Username</label>
+    <input data-controller="input" data-input-variant-value="success" type="text" value="johndoe"/>
+    <p class="text-sm text-emerald-600 mt-1.5">Username is available!</p>
+  </div>
+
+  <!-- Disabled -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block text-muted-foreground">Disabled</label>
+    <input data-controller="input" disabled value="Cannot edit"/>
+  </div>
+
+  <!-- Textarea -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Message</label>
+    <textarea data-controller="input" rows="3" placeholder="Type your message here..."></textarea>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- Tabs -->
+<div data-controller="tabs">
+  <div class="inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground" role="tablist">
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none border-b-2 border-foreground text-foreground bg-background">Account</button>
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none border-b-2 border-transparent text-muted-foreground">Password</button>
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none border-b-2 border-transparent text-muted-foreground">Notifications</button>
+  </div>
+  <div class="mt-4">
+    <div data-tabs-target="panel" role="tabpanel" class="rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Account</h3>
+      <p class="text-sm text-muted-foreground mb-4">Make changes to your account here. Click save when you're done.</p>
+      <div class="grid gap-3 max-w-sm">
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Name</label>
+          <input data-controller="input" type="text" value="Pedro Duarte"/>
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Username</label>
+          <input data-controller="input" type="text" value="@peduarte"/>
+        </div>
+      </div>
+      <button data-controller="button" class="mt-4">Save changes</button>
+    </div>
+    <div data-tabs-target="panel" role="tabpanel" class="hidden rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Password</h3>
+      <p class="text-sm text-muted-foreground mb-4">Change your password here. After saving, you'll be logged out.</p>
+      <div class="grid gap-3 max-w-sm">
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Current password</label>
+          <input data-controller="input" type="password" placeholder="••••••••"/>
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">New password</label>
+          <input data-controller="input" type="password" placeholder="••••••••"/>
+        </div>
+      </div>
+      <button data-controller="button" class="mt-4">Save password</button>
+    </div>
+    <div data-tabs-target="panel" role="tabpanel" class="hidden rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Notifications</h3>
+      <p class="text-sm text-muted-foreground mb-4">Configure how you receive notifications.</p>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between" data-controller="toggle">
+          <div>
+            <p class="text-sm font-medium">Email notifications</p>
+            <p class="text-xs text-muted-foreground">Receive emails about your account activity.</p>
+          </div>
+          <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+            <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+            <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

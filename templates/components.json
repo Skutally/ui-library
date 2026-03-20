@@ -1,0 +1,13 @@
+{
+  "$schema": "https://uilibrary.dev/schema.json",
+  "style": "default",
+  "tailwind": {
+    "version": 4,
+    "css": "src/base.css",
+    "cssVariables": true
+  },
+  "aliases": {
+    "controllers": "src/controllers",
+    "components": "components/ui"
+  }
+}

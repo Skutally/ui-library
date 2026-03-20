@@ -1,0 +1,33 @@
+{
+  "name": "uilibrary",
+  "version": "0.1.0",
+  "description": "A shadcn-style UI component library for HTML, Tailwind CSS & Stimulus.js. Copy-paste components into your project.",
+  "type": "module",
+  "bin": {
+    "uilibrary": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "registry",
+    "templates"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "tailwindcss",
+    "stimulus",
+    "shadcn"
+  ],
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i src/base.css -o dist/output.css --watch",
+    "build": "npx @tailwindcss/cli -i src/base.css -o dist/output.css --minify",
+    "serve": "npx serve .",
+    "start": "npm run build && npx serve ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

@@ -1,0 +1,37 @@
+<!-- Radio Group -->
+<div data-controller="radio" data-radio-selected-value="0" class="space-y-3">
+  <label class="text-sm font-medium">Choose a plan</label>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-primary flex items-center justify-center shrink-0 transition-colors">
+      <span class="h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Free</p>
+      <p class="text-sm text-muted-foreground">Up to 3 projects, basic features.</p>
+    </div>
+  </div>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-border flex items-center justify-center shrink-0 transition-colors">
+      <span class="hidden h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Pro</p>
+      <p class="text-sm text-muted-foreground">Unlimited projects, priority support.</p>
+    </div>
+  </div>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-border flex items-center justify-center shrink-0 transition-colors">
+      <span class="hidden h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Enterprise</p>
+      <p class="text-sm text-muted-foreground">Custom solutions, dedicated account manager.</p>
+    </div>
+  </div>
+</div>

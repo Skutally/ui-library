@@ -1,0 +1,32 @@
+<!-- Tooltip examples -->
+<div class="flex flex-wrap items-center gap-6">
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="outline">
+      Hover me
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150">
+      <p>Add to library</p>
+    </div>
+  </div>
+
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="ghost" data-button-size-value="icon">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150">
+      <p>Create new item</p>
+    </div>
+  </div>
+
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="secondary">
+      Settings
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150 whitespace-nowrap">
+      <p>Manage your preferences</p>
+    </div>
+  </div>
+</div>

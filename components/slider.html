@@ -1,0 +1,56 @@
+<!-- Slider / Range Input -->
+<div class="space-y-8 max-w-md">
+  <!-- Default slider -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Volume</label>
+      <span data-slider-target="output" class="text-sm text-muted-foreground tabular-nums">50</span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="100" data-slider-val-value="50">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-primary" style="width: 50%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-grab active:cursor-grabbing shadow"
+          style="left: 50%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price range -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Price</label>
+      <span class="text-sm text-muted-foreground">$<span data-slider-target="output" class="tabular-nums">25</span></span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="100" data-slider-val-value="25" data-slider-step-value="5">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-emerald-500" style="width: 25%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-emerald-500 bg-background ring-offset-background transition-colors focus-visible:outline-none cursor-grab active:cursor-grabbing shadow"
+          style="left: 25%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Temperature -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Temperature</label>
+      <span class="text-sm text-muted-foreground"><span data-slider-target="output" class="tabular-nums">0.7</span></span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="2" data-slider-val-value="0.7" data-slider-step-value="0.1">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-amber-500" style="width: 35%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-amber-500 bg-background ring-offset-background transition-colors focus-visible:outline-none cursor-grab active:cursor-grabbing shadow"
+          style="left: 35%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<!-- Progress bars -->
+<div class="space-y-6 max-w-md">
+  <!-- Default -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Progress</span>
+      <span class="text-sm text-muted-foreground">60%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="60" class="relative h-4 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-primary transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Small -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Upload</span>
+      <span class="text-sm text-muted-foreground">33%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="33" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-blue-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Complete</span>
+      <span class="text-sm text-muted-foreground">100%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="100" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Warning -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Storage</span>
+      <span class="text-sm text-muted-foreground">85%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="85" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-amber-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+</div>

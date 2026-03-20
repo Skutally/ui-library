@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI — Library</title>
+  <link rel="stylesheet" href="dist/output.css">
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+    /* Code block */
+    .code-block {
+      background: hsl(240 10% 3.9%);
+      color: hsl(0 0% 85%);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+    }
+    .code-block .tag { color: #7dd3fc; }
+    .code-block .attr { color: #c4b5fd; }
+    .code-block .val { color: #86efac; }
+    .code-block .comment { color: #6b7280; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@hotwired/stimulus/dist/stimulus.umd.js"></script>
+  <script src="src/controllers.js" defer></script>
+</head>
+<body class="font-sans antialiased min-h-screen">
+
+  <!-- Top header -->
+  <header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="flex h-14 items-center px-6">
+      <a href="#" class="flex items-center gap-2 mr-6">
+        <div class="w-6 h-6 rounded-md bg-foreground flex items-center justify-center">
+          <span class="text-background text-xs font-bold">Ui</span>
+        </div>
+        <span class="font-semibold tracking-tight">UI Library</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#" class="text-foreground/60 hover:text-foreground transition-colors">Docs</a>
+        <a href="#" class="text-foreground/60 hover:text-foreground transition-colors">Components</a>
+        <a href="#" class="text-foreground/60 hover:text-foreground transition-colors">Examples</a>
+      </nav>
+      <div class="ml-auto flex items-center gap-2">
+        <!-- Search -->
+        <div data-controller="search" class="relative hidden md:block">
+          <button data-action="click->search#open" class="inline-flex items-center gap-2 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Search components...
+            <kbd class="ml-4 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+              <span class="text-xs">⌘</span>K
+            </kbd>
+          </button>
+          <!-- Search modal rendered by controller -->
+        </div>
+      
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- Sidebar navigation -->
+    <aside class="hidden lg:block w-64 shrink-0 border-r border-border/40 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto py-6 px-4">
+      <nav class="space-y-6 text-sm">
+        <div>
+          <h4 class="font-semibold text-foreground mb-2 px-2">Getting Started</h4>
+          <ul class="space-y-0.5">
+            <li><a href="#installation" class="block rounded-md px-2 py-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors">Installation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-foreground mb-2 px-2">Components</h4>
+          <ul class="space-y-0.5" id="sidebar-nav">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 min-w-0">
+      <!-- Hero -->
+      <div class="border-b border-border/40 bg-background">
+        <div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
+          <div class="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground mb-4">
+            Stimulus.js + Tailwind CSS
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Build your component library.
+          </h1>
+          <p class="text-lg text-muted-foreground max-w-2xl mb-8">
+            Beautifully designed, accessible components built with Stimulus.js and Tailwind CSS. Copy and paste into your apps. Open source.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#buttons" class="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground h-10 px-6 text-sm font-medium hover:bg-primary/90 transition-colors">
+              Browse Components
+            </a>
+            <!-- <button onclick="navigator.clipboard.writeText('git clone https://github.com/your-repo/stimulus-ui.git')" class="inline-flex items-center justify-center rounded-md border border-border bg-background h-10 px-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy Install Command
+            </button> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Installation -->
+      <section id="installation" class="max-w-4xl mx-auto px-6 py-12 border-b border-border/40">
+        <h2 class="text-2xl font-bold tracking-tight mb-2">Installation</h2>
+        <p class="text-muted-foreground mb-6">Initialize your project, add components, and start building.</p>
+
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div>
+            <h3 class="text-sm font-semibold text-foreground mb-2">1. Initialize your project</h3>
+            <div class="code-block p-4">
+              <pre><span class="comment"># Create components.json and base CSS</span>
+<span class="val">npx uilibrary init</span></pre>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div>
+            <h3 class="text-sm font-semibold text-foreground mb-2">2. Add components you need</h3>
+            <div class="code-block p-4">
+              <pre><span class="comment"># Add individual components</span>
+<span class="val">npx uilibrary add button</span>
+<span class="val">npx uilibrary add modal tabs accordion</span>
+
+<span class="comment"># See all available components</span>
+<span class="val">npx uilibrary list</span></pre>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div>
+            <h3 class="text-sm font-semibold text-foreground mb-2">3. Build your CSS</h3>
+            <div class="code-block p-4">
+              <pre><span class="val">npx @tailwindcss/cli -i src/base.css -o dist/output.css</span></pre>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div>
+            <h3 class="text-sm font-semibold text-foreground mb-2">4. Use in your HTML</h3>
+            <div class="code-block p-4">
+              <pre><span class="comment">&lt;!-- Add compiled CSS --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"dist/output.css"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Add Stimulus --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://cdn.jsdelivr.net/npm/@hotwired/stimulus/dist/stimulus.umd.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Use a component --&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">data-controller</span>=<span class="val">"button"</span> <span class="attr">data-button-variant-value</span>=<span class="val">"default"</span><span class="tag">&gt;</span>
+  Click me
+<span class="tag">&lt;/button&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component sections -->
+      <div class="max-w-4xl mx-auto px-6 py-8 space-y-16">
+        <section id="buttons" data-component="button" data-label="Button" data-desc="Displays a button or a component that looks like a button."></section>
+        <section id="inputs" data-component="input" data-label="Input" data-desc="Displays a form input field or similar control."></section>
+        <section id="badges" data-component="badge" data-label="Badge" data-desc="Displays a badge or a component that looks like a badge."></section>
+        <section id="alerts" data-component="alert" data-label="Alert" data-desc="Displays a callout for important messages."></section>
+        <section id="cards" data-component="card" data-label="Card" data-desc="Displays a card with header, content, and footer."></section>
+        <section id="accordion" data-component="accordion" data-label="Accordion" data-desc="A vertically stacked set of interactive headings."></section>
+        <section id="tabs" data-component="tabs" data-label="Tabs" data-desc="A set of layered sections of content."></section>
+        <section id="dropdown" data-component="dropdown" data-label="Dropdown Menu" data-desc="Displays a menu triggered by a button."></section>
+        <section id="modal" data-component="modal" data-label="Dialog" data-desc="A modal dialog that interrupts the user."></section>
+        <section id="toast" data-component="toast" data-label="Toast" data-desc="A succinct message displayed temporarily."></section>
+        <section id="toggles" data-component="toggle" data-label="Switch" data-desc="A control that allows toggling between on and off."></section>
+        <section id="avatars" data-component="avatar" data-label="Avatar" data-desc="An image element with a fallback for user profiles."></section>
+        <section id="tooltips" data-component="tooltip" data-label="Tooltip" data-desc="A popup that displays information on hover."></section>
+        <section id="progress" data-component="progress" data-label="Progress" data-desc="Displays an indicator showing completion progress."></section>
+        <section id="skeleton" data-component="skeleton" data-label="Skeleton" data-desc="Used to show a placeholder while content is loading."></section>
+        <section id="separator" data-component="separator" data-label="Separator" data-desc="Visually or semantically separates content."></section>
+        <section id="table" data-component="table" data-label="Table" data-desc="A responsive table component with sorting."></section>
+        <section id="breadcrumb" data-component="breadcrumb" data-label="Breadcrumb" data-desc="Displays the path to the current page."></section>
+        <section id="checkbox" data-component="checkbox" data-label="Checkbox" data-desc="A control that allows the user to toggle between checked and not."></section>
+        <section id="radio" data-component="radio" data-label="Radio Group" data-desc="A set of checkable buttons where only one can be checked."></section>
+        <section id="sheet" data-component="sheet" data-label="Sheet" data-desc="A panel that slides out from the edge of the screen."></section>
+        <section id="popover" data-component="popover" data-label="Popover" data-desc="Displays rich content in a portal, triggered by a button."></section>
+        <section id="slider" data-component="slider" data-label="Slider" data-desc="An input where the user selects a value from a range."></section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-border/40">
+    <div class="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+      <p>Built with <span class="font-medium text-foreground">Stimulus.js</span> + <span class="font-medium text-foreground">Tailwind CSS</span>. Inspired by shadcn/ui.</p>
+      <p class="font-mono text-xs">Open source. Copy and paste.</p>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Populate sidebar navigation from component sections
+     */
+    function buildSidebar() {
+      const nav = document.getElementById("sidebar-nav")
+      const sections = document.querySelectorAll("[data-component]")
+      sections.forEach(section => {
+        const label = section.dataset.label || section.dataset.component
+        const id = section.id
+        const li = document.createElement("li")
+        li.innerHTML = `<a href="#${id}" class="block rounded-md px-2 py-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors">${label}</a>`
+        nav.appendChild(li)
+      })
+    }
+
+    /**
+     * Highlight active sidebar link on scroll
+     */
+    function setupScrollSpy() {
+      const links = document.querySelectorAll("#sidebar-nav a")
+      const sections = document.querySelectorAll("[data-component]")
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove("bg-accent", "text-foreground", "font-medium"))
+            const active = document.querySelector(`#sidebar-nav a[href="#${entry.target.id}"]`)
+            if (active) active.classList.add("bg-accent", "text-foreground", "font-medium")
+          }
+        })
+      }, { rootMargin: "-20% 0px -60% 0px" })
+      sections.forEach(s => observer.observe(s))
+    }
+
+    /**
+     * Load component HTML and render section with preview + code toggle
+     */
+    async function loadComponents() {
+      const sections = document.querySelectorAll("[data-component]")
+
+      for (const section of sections) {
+        const name = section.dataset.component
+        const label = section.dataset.label || name
+        const desc = section.dataset.desc || ""
+
+        try {
+          const tpl = document.getElementById(`tpl-${name}`)
+          if (!tpl) throw new Error(`Template not found: tpl-${name}`)
+          const html = tpl.innerHTML
+
+          section.innerHTML = `
+            <div class="space-y-4">
+              <div>
+                <h2 class="text-2xl font-bold tracking-tight">${label}</h2>
+                <p class="text-muted-foreground text-sm mt-1">${desc}</p>
+              </div>
+              <div class="rounded-lg border border-border" data-controller="preview">
+                <div class="flex items-center gap-1 border-b border-border px-4 py-2">
+                  <button data-action="click->preview#showPreview" data-preview-target="previewTab"
+                    class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium bg-accent text-accent-foreground transition-colors">
+                    Preview
+                  </button>
+                  <button data-action="click->preview#showCode" data-preview-target="codeTab"
+                    class="inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                    Code
+                  </button>
+                  <button data-action="click->preview#copy" data-preview-target="copyBtn"
+                    class="ml-auto inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    Copy
+                  </button>
+                </div>
+                <div data-preview-target="preview" class="p-6 space-y-4">
+                  ${html}
+                </div>
+                <div data-preview-target="code" class="hidden">
+                  <div class="code-block p-4 m-0 rounded-none rounded-b-lg max-h-96 overflow-auto">
+                    <pre></pre>
+                  </div>
+                </div>
+                <textarea data-preview-target="raw" class="hidden">${escapeHtml(html.trim())}</textarea>
+              </div>
+            </div>
+          `
+
+          // Populate code view
+          const pre = section.querySelector(".code-block pre")
+          if (pre) pre.textContent = html.trim()
+
+        } catch (err) {
+          section.innerHTML = `
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight">${label}</h2>
+              <p class="text-sm text-red-500 mt-2">Failed to load components/${name}.html</p>
+            </div>
+          `
+        }
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      buildSidebar()
+      await loadComponents()
+      setupScrollSpy()
+    })
+  </script>
+
+  <!-- Inline component templates (no server required) -->
+  <template id="tpl-accordion">
+<!-- Accordion — each item has data-accordion-item for scoping -->
+<div class="rounded-lg border border-border divide-y divide-border" data-controller="accordion">
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it accessible?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It adheres to the WAI-ARIA design pattern and supports keyboard navigation.
+    </div>
+  </div>
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it styled?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It comes with default styles that match the other components' aesthetic using Tailwind CSS utility classes.
+    </div>
+  </div>
+  <div data-accordion-item>
+    <button data-action="click->accordion#toggle" class="flex w-full items-center justify-between px-4 py-4 text-sm font-medium text-left hover:underline transition-all">
+      <span>Is it animated?</span>
+      <svg data-accordion-target="icon" class="w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </button>
+    <div data-accordion-target="body" class="hidden px-4 pb-4 text-sm text-muted-foreground">
+      Yes. It uses CSS transitions for smooth open/close animations with rotate transforms on the chevron icon.
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-alert">
+<!-- Alert variants -->
+<div class="space-y-3">
+  <div data-controller="alert" data-alert-variant-value="info">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div><strong class="font-semibold">Heads up!</strong> You can add components to your app using the CLI.</div>
+  </div>
+
+  <div data-controller="alert" data-alert-variant-value="success">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div><strong class="font-semibold">Success!</strong> Your changes have been saved.</div>
+  </div>
+
+  <div data-controller="alert" data-alert-variant-value="warning">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <div><strong class="font-semibold">Warning!</strong> Your storage is almost full.</div>
+  </div>
+
+  <div data-controller="alert" data-alert-variant-value="danger">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div><strong class="font-semibold">Error!</strong> Something went wrong. Please try again.</div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-avatar">
+<!-- Avatar examples -->
+<div class="flex flex-wrap items-center gap-4">
+  <!-- With image -->
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+    <img class="aspect-square h-full w-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane" alt="@jane" />
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+    <img class="aspect-square h-full w-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="@john" />
+  </span>
+
+  <!-- Fallback with initials -->
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-sm font-medium">CN</span>
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-sm font-medium">AB</span>
+  </span>
+</div>
+
+<!-- Sizes -->
+<div class="flex flex-wrap items-center gap-4">
+  <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-xs font-medium">SM</span>
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-sm font-medium">MD</span>
+  </span>
+  <span class="relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-base font-medium">LG</span>
+  </span>
+  <span class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-lg font-medium">XL</span>
+  </span>
+</div>
+
+<!-- Avatar group -->
+<div class="flex -space-x-3">
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-background bg-muted">
+    <img class="aspect-square h-full w-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" alt="Alice" />
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-background bg-muted">
+    <img class="aspect-square h-full w-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Bob" alt="Bob" />
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-background bg-muted">
+    <img class="aspect-square h-full w-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Charlie" alt="Charlie" />
+  </span>
+  <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-background bg-muted">
+    <span class="flex h-full w-full items-center justify-center rounded-full text-xs font-medium">+3</span>
+  </span>
+</div>
+
+  </template>
+
+  <template id="tpl-badge">
+<!-- Variants -->
+<div class="flex flex-wrap gap-2">
+  <span data-controller="badge" data-badge-variant-value="default">Default</span>
+  <span data-controller="badge" data-badge-variant-value="secondary">Secondary</span>
+  <span data-controller="badge" data-badge-variant-value="success">Success</span>
+  <span data-controller="badge" data-badge-variant-value="warning">Warning</span>
+  <span data-controller="badge" data-badge-variant-value="danger">Danger</span>
+  <span data-controller="badge" data-badge-variant-value="info">Info</span>
+  <span data-controller="badge" data-badge-variant-value="outline">Outline</span>
+</div>
+
+<!-- With status dot -->
+<div class="flex flex-wrap gap-2">
+  <span data-controller="badge" data-badge-variant-value="success" data-badge-dot-value="true">Active</span>
+  <span data-controller="badge" data-badge-variant-value="warning" data-badge-dot-value="true">Pending</span>
+  <span data-controller="badge" data-badge-variant-value="danger" data-badge-dot-value="true">Offline</span>
+  <span data-controller="badge" data-badge-variant-value="outline" data-badge-dot-value="true">Archived</span>
+</div>
+
+  </template>
+
+  <template id="tpl-breadcrumb">
+<!-- Breadcrumb navigation -->
+<div class="space-y-6">
+  <!-- Simple breadcrumb -->
+  <nav aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted-foreground">
+      <li><a href="#" class="hover:text-foreground transition-colors">Home</a></li>
+      <li>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </li>
+      <li><a href="#" class="hover:text-foreground transition-colors">Components</a></li>
+      <li>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </li>
+      <li class="text-foreground font-medium">Breadcrumb</li>
+    </ol>
+  </nav>
+
+  <!-- With icons -->
+  <nav aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted-foreground">
+      <li>
+        <a href="#" class="flex items-center gap-1.5 hover:text-foreground transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Home
+        </a>
+      </li>
+      <li><span class="text-muted-foreground/50">/</span></li>
+      <li><a href="#" class="hover:text-foreground transition-colors">Settings</a></li>
+      <li><span class="text-muted-foreground/50">/</span></li>
+      <li class="text-foreground font-medium">Profile</li>
+    </ol>
+  </nav>
+
+  <!-- With ellipsis for deep paths -->
+  <nav aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-sm text-muted-foreground">
+      <li><a href="#" class="hover:text-foreground transition-colors">Home</a></li>
+      <li>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </li>
+      <li>
+        <span class="flex h-9 w-9 items-center justify-center">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01"/></svg>
+        </span>
+      </li>
+      <li>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </li>
+      <li><a href="#" class="hover:text-foreground transition-colors">Components</a></li>
+      <li>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </li>
+      <li class="text-foreground font-medium">Breadcrumb</li>
+    </ol>
+  </nav>
+</div>
+
+  </template>
+
+  <template id="tpl-button">
+<!-- Button — Variants -->
+<div class="flex flex-wrap gap-2">
+  <button data-controller="button" data-button-variant-value="default">Primary</button>
+  <button data-controller="button" data-button-variant-value="secondary">Secondary</button>
+  <button data-controller="button" data-button-variant-value="destructive">Destructive</button>
+  <button data-controller="button" data-button-variant-value="outline">Outline</button>
+  <button data-controller="button" data-button-variant-value="ghost">Ghost</button>
+  <button data-controller="button" data-button-variant-value="link">Link</button>
+</div>
+
+<!-- Sizes -->
+<div class="flex flex-wrap items-center gap-2">
+  <button data-controller="button" data-button-size-value="xs">Extra Small</button>
+  <button data-controller="button" data-button-size-value="sm">Small</button>
+  <button data-controller="button">Default</button>
+  <button data-controller="button" data-button-size-value="lg">Large</button>
+  <button data-controller="button" data-button-size-value="xl">Extra Large</button>
+</div>
+
+<!-- With Icons -->
+<div class="flex flex-wrap items-center gap-2">
+  <button data-controller="button" data-button-variant-value="default">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+    Upload
+  </button>
+  <button data-controller="button" data-button-variant-value="outline">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    Login with Email
+  </button>
+  <button data-controller="button" data-button-size-value="icon" data-button-variant-value="outline">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+  </button>
+</div>
+
+<!-- Loading & Disabled -->
+<div class="flex flex-wrap items-center gap-2">
+  <button data-controller="button" data-button-loading-value="true" data-button-loading-text-value="Please wait...">Submit</button>
+  <button data-controller="button" data-button-clickable-value="true" data-button-loading-text-value="Saving...">Click me</button>
+  <button disabled data-controller="button">Disabled</button>
+</div>
+
+  </template>
+
+  <template id="tpl-card">
+<!-- Card examples -->
+<div class="grid md:grid-cols-2 gap-4">
+  <!-- Basic Card -->
+  <div data-controller="card">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">Create project</h3>
+      <p class="text-sm text-muted-foreground">Deploy your new project in one-click.</p>
+    </div>
+    <div class="p-6 pt-0 space-y-4">
+      <div>
+        <label class="text-sm font-medium mb-1.5 block">Name</label>
+        <input data-controller="input" type="text" placeholder="Name of your project"/>
+      </div>
+      <div>
+        <label class="text-sm font-medium mb-1.5 block">Framework</label>
+        <select data-controller="input">
+          <option>Next.js</option>
+          <option>SvelteKit</option>
+          <option>Astro</option>
+          <option>Nuxt.js</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex items-center p-6 pt-0 gap-2">
+      <button data-controller="button" data-button-variant-value="outline">Cancel</button>
+      <button data-controller="button">Deploy</button>
+    </div>
+  </div>
+
+  <!-- Notification Card -->
+  <div data-controller="card">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">Notifications</h3>
+      <p class="text-sm text-muted-foreground">You have 3 unread messages.</p>
+    </div>
+    <div class="p-6 pt-0">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">Your call has been confirmed.</p>
+            <p class="text-sm text-muted-foreground">1 hour ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">You have a new message!</p>
+            <p class="text-sm text-muted-foreground">2 hours ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-muted-foreground mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">Your subscription is expiring soon!</p>
+            <p class="text-sm text-muted-foreground">5 hours ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-6 pt-0">
+      <button data-controller="button" class="w-full">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        Mark all as read
+      </button>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-checkbox">
+<!-- Checkbox examples -->
+<div class="space-y-4">
+  <!-- Default unchecked -->
+  <div class="flex items-center gap-3" data-controller="checkbox">
+    <button role="checkbox" aria-checked="false" data-action="click->checkbox#toggle"
+      class="h-4 w-4 shrink-0 rounded-sm border border-border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="hidden h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Accept terms and conditions</label>
+  </div>
+
+  <!-- Pre-checked -->
+  <div class="flex items-center gap-3" data-controller="checkbox" data-checkbox-checked-value="true">
+    <button role="checkbox" aria-checked="true" data-action="click->checkbox#toggle"
+      class="h-4 w-4 shrink-0 rounded-sm border border-primary bg-primary text-primary-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Send me marketing emails</label>
+  </div>
+
+  <!-- With description -->
+  <div class="flex items-start gap-3" data-controller="checkbox">
+    <button role="checkbox" aria-checked="false" data-action="click->checkbox#toggle"
+      class="mt-0.5 h-4 w-4 shrink-0 rounded-sm border border-border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center transition-colors">
+      <svg data-checkbox-target="icon" class="hidden h-3 w-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </button>
+    <div>
+      <label class="text-sm font-medium leading-none cursor-pointer" data-action="click->checkbox#toggle">Use different settings for mobile</label>
+      <p class="text-sm text-muted-foreground mt-1">You can manage your mobile notifications in the settings page.</p>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-dropdown">
+<!-- Dropdown Menu -->
+<div class="relative inline-block" data-controller="dropdown">
+  <button data-action="click->dropdown#toggle" data-controller="button" data-button-variant-value="outline">
+    Open Menu
+    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+  </button>
+  <div data-dropdown-target="menu" class="hidden opacity-0 scale-95 absolute left-0 top-full mt-2 w-56 rounded-md border border-border bg-background shadow-md z-50 p-1 transition-all duration-100">
+    <div class="px-2 py-1.5 text-sm font-semibold">My Account</div>
+    <div class="h-px bg-border my-1 -mx-1"></div>
+    <a href="#" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground transition-colors">
+      <svg class="w-4 h-4 mr-2 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      Profile
+      <span class="ml-auto text-xs text-muted-foreground">⇧⌘P</span>
+    </a>
+    <a href="#" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground transition-colors">
+      <svg class="w-4 h-4 mr-2 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      Settings
+      <span class="ml-auto text-xs text-muted-foreground">⌘S</span>
+    </a>
+    <a href="#" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground transition-colors">
+      <svg class="w-4 h-4 mr-2 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      Billing
+      <span class="ml-auto text-xs text-muted-foreground">⌘B</span>
+    </a>
+    <div class="h-px bg-border my-1 -mx-1"></div>
+    <a href="#" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none text-red-600 hover:bg-red-50 dark:hover:bg-red-950 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+      Log out
+      <span class="ml-auto text-xs text-muted-foreground">⇧⌘Q</span>
+    </a>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-input">
+<!-- Default -->
+<div class="grid gap-4 max-w-sm">
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Email</label>
+    <input data-controller="input" type="email" placeholder="name@example.com"/>
+  </div>
+
+  <!-- With icon -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Search</label>
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input data-controller="input" data-input-icon-value="true" type="text" placeholder="Search..."/>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Email</label>
+    <input data-controller="input" data-input-variant-value="error" type="email" value="invalid-email"/>
+    <p class="text-sm text-red-500 mt-1.5">Please enter a valid email address.</p>
+  </div>
+
+  <!-- Success state -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Username</label>
+    <input data-controller="input" data-input-variant-value="success" type="text" value="johndoe"/>
+    <p class="text-sm text-emerald-600 mt-1.5">Username is available!</p>
+  </div>
+
+  <!-- Disabled -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block text-muted-foreground">Disabled</label>
+    <input data-controller="input" disabled value="Cannot edit"/>
+  </div>
+
+  <!-- Textarea -->
+  <div>
+    <label class="text-sm font-medium leading-none mb-2 block">Message</label>
+    <textarea data-controller="input" rows="3" placeholder="Type your message here..."></textarea>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-modal">
+<!-- Edit Profile Dialog -->
+<div class="flex flex-wrap gap-3" >
+<div data-controller="modal">
+  <button data-action="click->modal#open" data-controller="button" data-button-variant-value="outline">Edit Profile</button>
+  <div data-modal-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-200" data-action="click->modal#backdrop">
+    <div class="absolute inset-0 bg-black/80"></div>
+    <div data-modal-target="box" class="relative bg-background border border-border rounded-lg shadow-lg w-full max-w-lg scale-95 opacity-0 transition-all duration-200">
+      <div class="flex flex-col space-y-1.5 px-6 pt-6">
+        <h3 class="text-lg font-semibold leading-none tracking-tight">Edit profile</h3>
+        <p class="text-sm text-muted-foreground">Make changes to your profile here. Click save when you're done.</p>
+      </div>
+      <div class="px-6 py-4 space-y-4">
+        <div class="grid grid-cols-4 items-center gap-4">
+          <label class="text-sm font-medium text-right">Name</label>
+          <input data-controller="input" type="text" value="Pedro Duarte" class="col-span-3"/>
+        </div>
+        <div class="grid grid-cols-4 items-center gap-4">
+          <label class="text-sm font-medium text-right">Username</label>
+          <input data-controller="input" type="text" value="@peduarte" class="col-span-3"/>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-6 pb-6">
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="outline" data-button-size-value="sm">Cancel</button>
+        <button data-action="click->modal#close" data-controller="button" data-button-size-value="sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div data-controller="modal">
+  <button data-action="click->modal#open" data-controller="button" data-button-variant-value="destructive">Delete Account</button>
+  <div data-modal-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-200" data-action="click->modal#backdrop">
+    <div class="absolute inset-0 bg-black/80"></div>
+    <div data-modal-target="box" class="relative bg-background border border-border rounded-lg shadow-lg w-full max-w-md scale-95 opacity-0 transition-all duration-200">
+      <div class="px-6 pt-6">
+        <h3 class="text-lg font-semibold leading-none tracking-tight">Are you absolutely sure?</h3>
+        <p class="text-sm text-muted-foreground mt-2">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-6 py-6">
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="outline" data-button-size-value="sm">Cancel</button>
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="destructive" data-button-size-value="sm">Delete account</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+  </template>
+
+  <template id="tpl-popover">
+<!-- Popover -->
+<div class="flex flex-wrap gap-6">
+  <div class="relative inline-block" data-controller="popover">
+    <button data-action="click->popover#toggle" data-controller="button" data-button-variant-value="outline">Open Popover</button>
+    <div data-popover-target="content" class="hidden opacity-0 scale-95 absolute left-0 top-full mt-2 w-80 rounded-md border border-border bg-background shadow-md z-50 transition-all duration-100">
+      <div class="p-4 space-y-4">
+        <div class="space-y-2">
+          <h4 class="font-medium leading-none">Dimensions</h4>
+          <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+        </div>
+        <div class="grid gap-3">
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Width</label>
+            <input data-controller="input" type="text" value="100%" class="col-span-2"/>
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Height</label>
+            <input data-controller="input" type="text" value="25px" class="col-span-2"/>
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label class="text-sm font-medium">Max. width</label>
+            <input data-controller="input" type="text" value="300px" class="col-span-2"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-progress">
+<!-- Progress bars -->
+<div class="space-y-6 max-w-md">
+  <!-- Default -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Progress</span>
+      <span class="text-sm text-muted-foreground">60%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="60" class="relative h-4 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-primary transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Small -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Upload</span>
+      <span class="text-sm text-muted-foreground">33%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="33" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-blue-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Complete</span>
+      <span class="text-sm text-muted-foreground">100%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="100" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- Warning -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-medium">Storage</span>
+      <span class="text-sm text-muted-foreground">85%</span>
+    </div>
+    <div data-controller="progress" data-progress-value-value="85" class="relative h-2 w-full overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div data-progress-target="bar" class="h-full rounded-full bg-amber-500 transition-all duration-500" style="width: 0%"></div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-radio">
+<!-- Radio Group -->
+<div data-controller="radio" data-radio-selected-value="0" class="space-y-3">
+  <label class="text-sm font-medium">Choose a plan</label>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-primary flex items-center justify-center shrink-0 transition-colors">
+      <span class="h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Free</p>
+      <p class="text-sm text-muted-foreground">Up to 3 projects, basic features.</p>
+    </div>
+  </div>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-border flex items-center justify-center shrink-0 transition-colors">
+      <span class="hidden h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Pro</p>
+      <p class="text-sm text-muted-foreground">Unlimited projects, priority support.</p>
+    </div>
+  </div>
+
+  <div data-action="click->radio#select" data-radio-target="option"
+    class="flex items-center gap-3 cursor-pointer">
+    <span data-radio-target="dot" class="h-4 w-4 rounded-full border-2 border-border flex items-center justify-center shrink-0 transition-colors">
+      <span class="hidden h-2 w-2 rounded-full bg-primary"></span>
+    </span>
+    <div>
+      <p class="text-sm font-medium">Enterprise</p>
+      <p class="text-sm text-muted-foreground">Custom solutions, dedicated account manager.</p>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-separator">
+<!-- Separator / Divider -->
+<div class="space-y-6">
+  <div>
+    <h4 class="text-sm font-medium mb-1">Ui Library</h4>
+    <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
+  </div>
+
+  <!-- Horizontal separator -->
+  <div class="shrink-0 bg-border h-[1px] w-full" role="separator"></div>
+
+  <div class="flex items-center gap-4 h-5">
+    <a href="#" class="text-sm font-medium hover:underline">Blog</a>
+    <!-- Vertical separator -->
+    <div class="shrink-0 bg-border w-[1px] h-full" role="separator" aria-orientation="vertical"></div>
+    <a href="#" class="text-sm font-medium hover:underline">Docs</a>
+    <div class="shrink-0 bg-border w-[1px] h-full" role="separator" aria-orientation="vertical"></div>
+    <a href="#" class="text-sm font-medium hover:underline">Source</a>
+  </div>
+
+  <!-- Separator with label -->
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-border"></div></div>
+    <div class="relative flex justify-center text-xs uppercase">
+      <span class="bg-background px-2 text-muted-foreground">Or continue with</span>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-sheet">
+<!-- Sheet / Drawer -->
+<div class="flex flex-wrap gap-3">
+  <!-- Right sheet -->
+  <div data-controller="sheet" data-sheet-side-value="right">
+    <button data-action="click->sheet#open" data-controller="button" data-button-variant-value="outline">Open Sheet</button>
+    <div data-sheet-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 transition-opacity duration-300" data-action="click->sheet#backdrop">
+      <div class="absolute inset-0 bg-black/80"></div>
+      <div data-sheet-target="panel" class="fixed inset-y-0 right-0 w-full max-w-sm bg-background border-l border-border shadow-lg translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col h-full">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+            <div>
+              <h3 class="text-lg font-semibold">Edit profile</h3>
+              <p class="text-sm text-muted-foreground">Make changes to your profile here.</p>
+            </div>
+            <button data-action="click->sheet#close" class="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+            <div>
+              <label class="text-sm font-medium mb-1.5 block">Name</label>
+              <input data-controller="input" type="text" value="Pedro Duarte"/>
+            </div>
+            <div>
+              <label class="text-sm font-medium mb-1.5 block">Username</label>
+              <input data-controller="input" type="text" value="@peduarte"/>
+            </div>
+            <div>
+              <label class="text-sm font-medium mb-1.5 block">Bio</label>
+              <textarea data-controller="input" rows="3" placeholder="Tell us about yourself"></textarea>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 px-6 py-4 border-t border-border">
+            <button data-action="click->sheet#close" data-controller="button" data-button-variant-value="outline">Cancel</button>
+            <button data-action="click->sheet#close" data-controller="button">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left sheet -->
+  <div data-controller="sheet" data-sheet-side-value="left">
+    <button data-action="click->sheet#open" data-controller="button" data-button-variant-value="outline">Open Left Sheet</button>
+    <div data-sheet-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 transition-opacity duration-300" data-action="click->sheet#backdrop">
+      <div class="absolute inset-0 bg-black/80"></div>
+      <div data-sheet-target="panel" class="fixed inset-y-0 left-0 w-full max-w-sm bg-background border-r border-border shadow-lg -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col h-full">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+            <h3 class="text-lg font-semibold">Navigation</h3>
+            <button data-action="click->sheet#close" class="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <nav class="flex-1 px-4 py-4 space-y-1">
+            <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium bg-accent text-accent-foreground">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+              Projects
+            </a>
+            <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Settings
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-skeleton">
+<!-- Skeleton loading states -->
+<div class="space-y-8">
+  <!-- Card skeleton -->
+  <div class="rounded-lg border border-border p-6 space-y-4">
+    <div class="flex items-center gap-4">
+      <div class="h-12 w-12 rounded-full bg-muted animate-pulse"></div>
+      <div class="space-y-2 flex-1">
+        <div class="h-4 w-1/3 rounded-md bg-muted animate-pulse"></div>
+        <div class="h-3 w-1/4 rounded-md bg-muted animate-pulse"></div>
+      </div>
+    </div>
+    <div class="space-y-2">
+      <div class="h-3 w-full rounded-md bg-muted animate-pulse"></div>
+      <div class="h-3 w-full rounded-md bg-muted animate-pulse"></div>
+      <div class="h-3 w-2/3 rounded-md bg-muted animate-pulse"></div>
+    </div>
+  </div>
+
+  <!-- List skeleton -->
+  <div class="rounded-lg border border-border divide-y divide-border">
+    <div class="flex items-center gap-4 p-4">
+      <div class="h-10 w-10 rounded-full bg-muted animate-pulse"></div>
+      <div class="space-y-2 flex-1">
+        <div class="h-4 w-1/4 rounded-md bg-muted animate-pulse"></div>
+        <div class="h-3 w-1/2 rounded-md bg-muted animate-pulse"></div>
+      </div>
+      <div class="h-8 w-16 rounded-md bg-muted animate-pulse"></div>
+    </div>
+    <div class="flex items-center gap-4 p-4">
+      <div class="h-10 w-10 rounded-full bg-muted animate-pulse"></div>
+      <div class="space-y-2 flex-1">
+        <div class="h-4 w-1/3 rounded-md bg-muted animate-pulse"></div>
+        <div class="h-3 w-2/5 rounded-md bg-muted animate-pulse"></div>
+      </div>
+      <div class="h-8 w-16 rounded-md bg-muted animate-pulse"></div>
+    </div>
+    <div class="flex items-center gap-4 p-4">
+      <div class="h-10 w-10 rounded-full bg-muted animate-pulse"></div>
+      <div class="space-y-2 flex-1">
+        <div class="h-4 w-1/5 rounded-md bg-muted animate-pulse"></div>
+        <div class="h-3 w-1/3 rounded-md bg-muted animate-pulse"></div>
+      </div>
+      <div class="h-8 w-16 rounded-md bg-muted animate-pulse"></div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-slider">
+<!-- Slider / Range Input -->
+<div class="space-y-8 max-w-md">
+  <!-- Default slider -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Volume</label>
+      <span data-slider-target="output" class="text-sm text-muted-foreground tabular-nums">50</span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="100" data-slider-val-value="50">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-primary" style="width: 50%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-grab active:cursor-grabbing shadow"
+          style="left: 50%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price range -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Price</label>
+      <span class="text-sm text-muted-foreground">$<span data-slider-target="output" class="tabular-nums">25</span></span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="100" data-slider-val-value="25" data-slider-step-value="5">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-emerald-500" style="width: 25%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-emerald-500 bg-background ring-offset-background transition-colors focus-visible:outline-none cursor-grab active:cursor-grabbing shadow"
+          style="left: 25%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Temperature -->
+  <div>
+    <div class="flex items-center justify-between mb-3">
+      <label class="text-sm font-medium">Temperature</label>
+      <span class="text-sm text-muted-foreground"><span data-slider-target="output" class="tabular-nums">0.7</span></span>
+    </div>
+    <div data-controller="slider" data-slider-min-value="0" data-slider-max-value="2" data-slider-val-value="0.7" data-slider-step-value="0.1">
+      <div data-slider-target="track" data-action="mousedown->slider#startDrag touchstart->slider#startDrag"
+        class="relative w-full h-2 rounded-full bg-muted cursor-pointer">
+        <div data-slider-target="fill" class="absolute h-full rounded-full bg-amber-500" style="width: 35%"></div>
+        <div data-slider-target="thumb"
+          class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full border-2 border-amber-500 bg-background ring-offset-background transition-colors focus-visible:outline-none cursor-grab active:cursor-grabbing shadow"
+          style="left: 35%"
+          data-action="mousedown->slider#startDrag touchstart->slider#startDrag"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-table">
+<!-- Table with sortable headers -->
+<div class="rounded-lg border border-border overflow-hidden" data-controller="table">
+  <table class="w-full caption-bottom text-sm">
+    <thead class="border-b border-border">
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <th data-col="0" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Invoice
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="1" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Status
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="2" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center gap-1">
+            Method
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+        <th data-col="3" data-action="click->table#sort" data-table-target="header"
+          class="h-12 px-4 text-right align-middle font-medium text-muted-foreground cursor-pointer hover:text-foreground select-none">
+          <div class="flex items-center justify-end gap-1">
+            Amount
+            <svg data-sort-icon class="w-4 h-4 opacity-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody data-table-target="body" class="[&_tr:last-child]:border-0">
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV001</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Credit Card</td>
+        <td class="p-4 align-middle text-right font-medium">$250.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV002</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="warning">Pending</span></td>
+        <td class="p-4 align-middle text-muted-foreground">PayPal</td>
+        <td class="p-4 align-middle text-right font-medium">$150.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV003</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="danger">Overdue</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Bank Transfer</td>
+        <td class="p-4 align-middle text-right font-medium">$350.00</td>
+      </tr>
+      <tr class="border-b border-border transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV004</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">Credit Card</td>
+        <td class="p-4 align-middle text-right font-medium">$450.00</td>
+      </tr>
+      <tr class="transition-colors hover:bg-muted/50">
+        <td class="p-4 align-middle font-medium">INV005</td>
+        <td class="p-4 align-middle"><span data-controller="badge" data-badge-variant-value="success">Paid</span></td>
+        <td class="p-4 align-middle text-muted-foreground">PayPal</td>
+        <td class="p-4 align-middle text-right font-medium">$550.00</td>
+      </tr>
+    </tbody>
+    <tfoot class="border-t border-border bg-muted/50">
+      <tr>
+        <td colspan="3" class="p-4 align-middle font-medium">Total</td>
+        <td class="p-4 align-middle text-right font-bold">$1,750.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+  </template>
+
+  <template id="tpl-tabs">
+<!-- Tabs -->
+<div data-controller="tabs">
+  <div class="inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground" role="tablist">
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none border-b-2 border-foreground text-foreground bg-background">Account</button>
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none border-b-2 border-transparent text-muted-foreground">Password</button>
+    <button data-action="click->tabs#switch" data-tabs-target="tab" role="tab"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none border-b-2 border-transparent text-muted-foreground">Notifications</button>
+  </div>
+  <div class="mt-4">
+    <div data-tabs-target="panel" role="tabpanel" class="rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Account</h3>
+      <p class="text-sm text-muted-foreground mb-4">Make changes to your account here. Click save when you're done.</p>
+      <div class="grid gap-3 max-w-sm">
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Name</label>
+          <input data-controller="input" type="text" value="Pedro Duarte"/>
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Username</label>
+          <input data-controller="input" type="text" value="@peduarte"/>
+        </div>
+      </div>
+      <button data-controller="button" class="mt-4">Save changes</button>
+    </div>
+    <div data-tabs-target="panel" role="tabpanel" class="hidden rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Password</h3>
+      <p class="text-sm text-muted-foreground mb-4">Change your password here. After saving, you'll be logged out.</p>
+      <div class="grid gap-3 max-w-sm">
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">Current password</label>
+          <input data-controller="input" type="password" placeholder="••••••••"/>
+        </div>
+        <div>
+          <label class="text-sm font-medium mb-1.5 block">New password</label>
+          <input data-controller="input" type="password" placeholder="••••••••"/>
+        </div>
+      </div>
+      <button data-controller="button" class="mt-4">Save password</button>
+    </div>
+    <div data-tabs-target="panel" role="tabpanel" class="hidden rounded-lg border border-border p-6">
+      <h3 class="text-lg font-semibold mb-1">Notifications</h3>
+      <p class="text-sm text-muted-foreground mb-4">Configure how you receive notifications.</p>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between" data-controller="toggle">
+          <div>
+            <p class="text-sm font-medium">Email notifications</p>
+            <p class="text-xs text-muted-foreground">Receive emails about your account activity.</p>
+          </div>
+          <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+            <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+            <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-toast">
+<!-- Toast notifications -->
+<div data-controller="toast">
+  <div data-toast-target="container" class="fixed top-4 right-4 z-[60] flex flex-col gap-2 w-80" aria-live="polite"></div>
+  <div class="flex flex-wrap gap-2">
+    <button data-action="click->toast#show" data-toast-type-param="info" data-toast-msg-param="Here is some useful info."
+      data-controller="button" data-button-variant-value="outline">Info</button>
+    <button data-action="click->toast#show" data-toast-type-param="success" data-toast-msg-param="Changes saved successfully!"
+      data-controller="button" data-button-variant-value="outline">Success</button>
+    <button data-action="click->toast#show" data-toast-type-param="warning" data-toast-msg-param="You have unsaved changes."
+      data-controller="button" data-button-variant-value="outline">Warning</button>
+    <button data-action="click->toast#show" data-toast-type-param="danger" data-toast-msg-param="Something went wrong."
+      data-controller="button" data-button-variant-value="outline">Error</button>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-toggle">
+<!-- Switch / Toggle -->
+<div class="rounded-lg border border-border divide-y divide-border">
+  <div class="flex items-center justify-between p-4" data-controller="toggle">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Airplane Mode</label>
+      <p class="text-xs text-muted-foreground">Disable all wireless connections.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+    </button>
+  </div>
+  <div class="flex items-center justify-between p-4" data-controller="toggle" data-toggle-checked-value="true">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Notifications</label>
+      <p class="text-xs text-muted-foreground">Receive push notifications.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="true">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-primary transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50" style="transform:translateX(20px)"></div>
+    </button>
+  </div>
+  <div class="flex items-center justify-between p-4" data-controller="toggle">
+    <div class="space-y-0.5">
+      <label class="text-sm font-medium leading-none">Marketing emails</label>
+      <p class="text-xs text-muted-foreground">Receive emails about new products.</p>
+    </div>
+    <button data-action="click->toggle#flip" class="relative w-11 h-6 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" role="switch" aria-checked="false">
+      <div data-toggle-target="track" class="absolute inset-0 rounded-full bg-muted transition-colors duration-200"></div>
+      <div data-toggle-target="thumb" class="absolute top-0.5 left-0.5 w-5 h-5 bg-background rounded-full shadow transition-transform duration-200 border border-border/50"></div>
+    </button>
+  </div>
+</div>
+
+  </template>
+
+  <template id="tpl-tooltip">
+<!-- Tooltip examples -->
+<div class="flex flex-wrap items-center gap-6">
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="outline">
+      Hover me
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150">
+      <p>Add to library</p>
+    </div>
+  </div>
+
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="ghost" data-button-size-value="icon">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150">
+      <p>Create new item</p>
+    </div>
+  </div>
+
+  <div class="relative inline-block" data-controller="tooltip">
+    <button data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+      data-controller="button" data-button-variant-value="secondary">
+      Settings
+    </button>
+    <div data-tooltip-target="content" class="hidden opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 overflow-hidden rounded-md border border-border bg-foreground px-3 py-1.5 text-sm text-background shadow-md transition-opacity duration-150 whitespace-nowrap">
+      <p>Manage your preferences</p>
+    </div>
+  </div>
+</div>
+
+  </template>
+
+</body>
+</html>

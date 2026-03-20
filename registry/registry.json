@@ -1,0 +1,207 @@
+{
+  "components": {
+    "accordion": {
+      "name": "accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/accordion.js",
+        "template": "components/accordion.html"
+      }
+    },
+    "alert": {
+      "name": "alert",
+      "description": "Displays a callout for important information with variant styles (info, success, warning, danger).",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/alert.js",
+        "template": "components/alert.html"
+      }
+    },
+    "avatar": {
+      "name": "avatar",
+      "description": "An image element with a fallback for representing the user.",
+      "dependencies": [],
+      "files": {
+        "template": "components/avatar.html"
+      }
+    },
+    "badge": {
+      "name": "badge",
+      "description": "Displays a small status descriptor with variant styles.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/badge.js",
+        "template": "components/badge.html"
+      }
+    },
+    "breadcrumb": {
+      "name": "breadcrumb",
+      "description": "Displays the path to the current page using a hierarchy of links.",
+      "dependencies": [],
+      "files": {
+        "template": "components/breadcrumb.html"
+      }
+    },
+    "button": {
+      "name": "button",
+      "description": "A clickable button with multiple variants and sizes.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/button.js",
+        "template": "components/button.html"
+      }
+    },
+    "card": {
+      "name": "card",
+      "description": "A container with a border and shadow used to group content.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/card.js",
+        "template": "components/card.html"
+      }
+    },
+    "checkbox": {
+      "name": "checkbox",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/checkbox.js",
+        "template": "components/checkbox.html"
+      }
+    },
+    "dropdown": {
+      "name": "dropdown",
+      "description": "A menu that appears on trigger click with a list of actions.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/dropdown.js",
+        "template": "components/dropdown.html"
+      }
+    },
+    "input": {
+      "name": "input",
+      "description": "A text input field with variant styles and icon support.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/input.js",
+        "template": "components/input.html"
+      }
+    },
+    "modal": {
+      "name": "modal",
+      "description": "A dialog overlay that requires user interaction before returning to the page.",
+      "dependencies": ["button"],
+      "files": {
+        "controller": "src/controllers/modal.js",
+        "template": "components/modal.html"
+      }
+    },
+    "popover": {
+      "name": "popover",
+      "description": "A floating panel anchored to a trigger element.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/popover.js",
+        "template": "components/popover.html"
+      }
+    },
+    "progress": {
+      "name": "progress",
+      "description": "A horizontal bar indicating progress or completion percentage.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/progress.js",
+        "template": "components/progress.html"
+      }
+    },
+    "radio": {
+      "name": "radio",
+      "description": "A set of mutually exclusive options presented as a group.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/radio.js",
+        "template": "components/radio.html"
+      }
+    },
+    "separator": {
+      "name": "separator",
+      "description": "A visual divider between sections of content.",
+      "dependencies": [],
+      "files": {
+        "template": "components/separator.html"
+      }
+    },
+    "sheet": {
+      "name": "sheet",
+      "description": "A panel that slides in from any edge of the screen.",
+      "dependencies": ["button"],
+      "files": {
+        "controller": "src/controllers/sheet.js",
+        "template": "components/sheet.html"
+      }
+    },
+    "skeleton": {
+      "name": "skeleton",
+      "description": "A placeholder animation shown while content is loading.",
+      "dependencies": [],
+      "files": {
+        "template": "components/skeleton.html"
+      }
+    },
+    "slider": {
+      "name": "slider",
+      "description": "A draggable input for selecting a numeric value within a range.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/slider.js",
+        "template": "components/slider.html"
+      }
+    },
+    "table": {
+      "name": "table",
+      "description": "A data table with sortable column headers.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/table.js",
+        "template": "components/table.html"
+      }
+    },
+    "tabs": {
+      "name": "tabs",
+      "description": "A set of layered sections of content that display one panel at a time.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/tabs.js",
+        "template": "components/tabs.html"
+      }
+    },
+    "toast": {
+      "name": "toast",
+      "description": "A temporary notification that appears at the edge of the screen.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/toast.js",
+        "template": "components/toast.html"
+      }
+    },
+    "toggle": {
+      "name": "toggle",
+      "description": "A switch control that toggles between on and off states.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/toggle.js",
+        "template": "components/toggle.html"
+      }
+    },
+    "tooltip": {
+      "name": "tooltip",
+      "description": "A small popup that shows additional information on hover.",
+      "dependencies": [],
+      "files": {
+        "controller": "src/controllers/tooltip.js",
+        "template": "components/tooltip.html"
+      }
+    }
+  }
+}

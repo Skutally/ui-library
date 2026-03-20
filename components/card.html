@@ -1,0 +1,68 @@
+<!-- Card examples -->
+<div class="grid md:grid-cols-2 gap-4">
+  <!-- Basic Card -->
+  <div data-controller="card">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">Create project</h3>
+      <p class="text-sm text-muted-foreground">Deploy your new project in one-click.</p>
+    </div>
+    <div class="p-6 pt-0 space-y-4">
+      <div>
+        <label class="text-sm font-medium mb-1.5 block">Name</label>
+        <input data-controller="input" type="text" placeholder="Name of your project"/>
+      </div>
+      <div>
+        <label class="text-sm font-medium mb-1.5 block">Framework</label>
+        <select data-controller="input">
+          <option>Next.js</option>
+          <option>SvelteKit</option>
+          <option>Astro</option>
+          <option>Nuxt.js</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex items-center p-6 pt-0 gap-2">
+      <button data-controller="button" data-button-variant-value="outline">Cancel</button>
+      <button data-controller="button">Deploy</button>
+    </div>
+  </div>
+
+  <!-- Notification Card -->
+  <div data-controller="card">
+    <div class="flex flex-col space-y-1.5 p-6">
+      <h3 class="text-2xl font-semibold leading-none tracking-tight">Notifications</h3>
+      <p class="text-sm text-muted-foreground">You have 3 unread messages.</p>
+    </div>
+    <div class="p-6 pt-0">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">Your call has been confirmed.</p>
+            <p class="text-sm text-muted-foreground">1 hour ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">You have a new message!</p>
+            <p class="text-sm text-muted-foreground">2 hours ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-2 h-2 rounded-full bg-muted-foreground mt-2 shrink-0"></span>
+          <div class="space-y-1">
+            <p class="text-sm font-medium leading-none">Your subscription is expiring soon!</p>
+            <p class="text-sm text-muted-foreground">5 hours ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-6 pt-0">
+      <button data-controller="button" class="w-full">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        Mark all as read
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<!-- Edit Profile Dialog -->
+<div class="flex flex-wrap gap-3" >
+<div data-controller="modal">
+  <button data-action="click->modal#open" data-controller="button" data-button-variant-value="outline">Edit Profile</button>
+  <div data-modal-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-200" data-action="click->modal#backdrop">
+    <div class="absolute inset-0 bg-black/80"></div>
+    <div data-modal-target="box" class="relative bg-background border border-border rounded-lg shadow-lg w-full max-w-lg scale-95 opacity-0 transition-all duration-200">
+      <div class="flex flex-col space-y-1.5 px-6 pt-6">
+        <h3 class="text-lg font-semibold leading-none tracking-tight">Edit profile</h3>
+        <p class="text-sm text-muted-foreground">Make changes to your profile here. Click save when you're done.</p>
+      </div>
+      <div class="px-6 py-4 space-y-4">
+        <div class="grid grid-cols-4 items-center gap-4">
+          <label class="text-sm font-medium text-right">Name</label>
+          <input data-controller="input" type="text" value="Pedro Duarte" class="col-span-3"/>
+        </div>
+        <div class="grid grid-cols-4 items-center gap-4">
+          <label class="text-sm font-medium text-right">Username</label>
+          <input data-controller="input" type="text" value="@peduarte" class="col-span-3"/>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-6 pb-6">
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="outline" data-button-size-value="sm">Cancel</button>
+        <button data-action="click->modal#close" data-controller="button" data-button-size-value="sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div data-controller="modal">
+  <button data-action="click->modal#open" data-controller="button" data-button-variant-value="destructive">Delete Account</button>
+  <div data-modal-target="overlay" class="hidden opacity-0 fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-200" data-action="click->modal#backdrop">
+    <div class="absolute inset-0 bg-black/80"></div>
+    <div data-modal-target="box" class="relative bg-background border border-border rounded-lg shadow-lg w-full max-w-md scale-95 opacity-0 transition-all duration-200">
+      <div class="px-6 pt-6">
+        <h3 class="text-lg font-semibold leading-none tracking-tight">Are you absolutely sure?</h3>
+        <p class="text-sm text-muted-foreground mt-2">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
+      </div>
+      <div class="flex justify-end gap-2 px-6 py-6">
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="outline" data-button-size-value="sm">Cancel</button>
+        <button data-action="click->modal#close" data-controller="button" data-button-variant-value="destructive" data-button-size-value="sm">Delete account</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
